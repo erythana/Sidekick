@@ -1,0 +1,46 @@
+<Window
+    xmlns="https://github.com/avaloniaui"
+    x:Class="Sidekick.Avalonia.MainWindow"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:Sidekick.Avalonia"
+    Title="Sidekick"
+    Width="0"
+    Height="0"
+    Background="Transparent"
+    CanResize="True"
+    WindowStartupLocation="CenterScreen"
+    SystemDecorations="BorderOnly"
+    BorderThickness="10"
+    mc:Ignorable="d">
+    
+    <Grid Name="Grid" Margin="5">
+        <local:OverlayControl
+            x:Name="OverlayContainer"
+            Height="40"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Top">
+            <!--  Border used for dragging the window.  -->
+            <Grid ColumnDefinitions="70*,30*">
+                <Border
+                    Name="TopBorder"
+                    Grid.Column="0"
+                    Background="Black"
+                    PointerPressed="TopBorder_OnPointerPressed"
+                    Opacity="0.01" />
+            </Grid>
+        </local:OverlayControl>
+
+        <!--TODO-->
+        <!-- <blazor:BlazorWebView -->
+        <!--     Name="WebView" -->
+        <!--     HostPage="wwwroot\index.html" -->
+        <!--     Services="{DynamicResource services}" -->
+        <!--     Visibility="Hidden"> -->
+        <!--     <blazor:BlazorWebView.RootComponents> -->
+        <!--         <blazor:RootComponent ComponentType="{x:Type local:SidekickBlazorWrapper}" Selector="#app" /> -->
+        <!--     </blazor:BlazorWebView.RootComponents> -->
+        <!-- </blazor:BlazorWebView> -->
+    </Grid>
+</Window>

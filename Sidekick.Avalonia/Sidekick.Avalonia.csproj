@@ -1,0 +1,91 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
+        <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="11.0.10"/>
+        <PackageReference Include="Avalonia.Desktop" Version="11.0.10"/>
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.10"/>
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.10"/>
+        <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.10"/>
+        <PackageReference Include="ReactiveUI" Version="20.1.63" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Update="wwwroot\.gitignore">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Update="wwwroot\favicon.ico">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Update="wwwroot\index.html">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Update="SidekickBlazorWrapper.razor">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      </Content>
+      <Content Update=".gitignore">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </Content>
+      <Content Update=".gitignore">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </Content>
+      <Content Update="SidekickBlazorWrapper.razor">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="..\README.md">
+        <Pack>True</Pack>
+        <PackagePath>/</PackagePath>
+        <Link>README.md</Link>
+      </None>
+      <None Include="..\src\Sidekick.Common.Ui\wwwroot\android-chrome-192x192.png">
+        <Pack>True</Pack>
+        <PackagePath>/</PackagePath>
+        <Link>android-chrome-192x192.png</Link>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\src\Sidekick.Apis.PoeNinja\Sidekick.Apis.PoeNinja.csproj" />
+      <ProjectReference Include="..\src\Sidekick.Apis.PoePriceInfo\Sidekick.Apis.PoePriceInfo.csproj" />
+      <ProjectReference Include="..\src\Sidekick.Apis.PoeWiki\Sidekick.Apis.PoeWiki.csproj" />
+      <ProjectReference Include="..\src\Sidekick.Common.Blazor\Sidekick.Common.Blazor.csproj" />
+      <ProjectReference Include="..\src\Sidekick.Common.Ui\Sidekick.Common.Ui.csproj" />
+      <ProjectReference Include="..\src\Sidekick.Common.Updater\Sidekick.Common.Updater.csproj" />
+      <ProjectReference Include="..\src\Sidekick.Common\Sidekick.Common.csproj" />
+      <ProjectReference Include="..\src\Sidekick.Mock\Sidekick.Mock.csproj" />
+      <ProjectReference Include="..\src\Sidekick.Modules.Chat\Sidekick.Modules.Chat.csproj" />
+      <ProjectReference Include="..\src\Sidekick.Modules.Development\Sidekick.Modules.Development.csproj" />
+      <ProjectReference Include="..\src\Sidekick.Modules.General\Sidekick.Modules.General.csproj" />
+      <ProjectReference Include="..\src\Sidekick.Modules.Maps\Sidekick.Modules.Maps.csproj" />
+      <ProjectReference Include="..\src\Sidekick.Modules.Trade\Sidekick.Modules.Trade.csproj" />
+      <ProjectReference Include="..\src\Sidekick.Modules.Wealth\Sidekick.Modules.Wealth.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="wwwroot\favicon.ico" />
+      <AvaloniaResource Include="Assets\favicon.ico">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </AvaloniaResource>
+    </ItemGroup>
+</Project>

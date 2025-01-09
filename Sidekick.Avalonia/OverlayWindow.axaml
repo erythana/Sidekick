@@ -1,0 +1,10 @@
+<Window x:Class="Sidekick.Avalonia.OverlayWindow"
+        xmlns="https://github.com/avaloniaui"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Background="Transparent"
+        Title="Sidekick Overlay"
+        ShowInTaskbar="False">
+</Window>
