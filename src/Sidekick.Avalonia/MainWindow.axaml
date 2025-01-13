@@ -7,12 +7,12 @@
     xmlns:local="clr-namespace:Sidekick.Avalonia"
     xmlns:cefglue="clr-namespace:Xilium.CefGlue.Avalonia;assembly=Xilium.CefGlue.Avalonia"
     Title="Sidekick"
-    Width="0"
-    Height="0"
-    Background="Transparent"
+    Width="1"
+    Height="1"
+    Background="Red"
     CanResize="True"
     WindowStartupLocation="CenterScreen"
-    SystemDecorations="BorderOnly"
+    SystemDecorations="None"
     BorderThickness="10"
     mc:Ignorable="d">
     
@@ -29,7 +29,7 @@
                     Grid.Column="0"
                     Background="Black"
                     PointerPressed="TopBorder_OnPointerPressed"
-                    Opacity="0.01" />
+                    Opacity="0.99" />
             </Grid>
         </local:OverlayControl>
         

@@ -72,7 +72,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sidekick.Common.Ui", "src\S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sidekick.Common.Updater", "src\Sidekick.Common.Updater\Sidekick.Common.Updater.csproj", "{2F2F03B3-213A-40D7-B818-8E618DDF01AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sidekick.Avalonia", "Sidekick.Avalonia\Sidekick.Avalonia.csproj", "{D9A8AA25-2CE3-4D3C-8B4C-6C3736ACCA83}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sidekick.Avalonia", "src\Sidekick.Avalonia\Sidekick.Avalonia.csproj", "{D9A8AA25-2CE3-4D3C-8B4C-6C3736ACCA83}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

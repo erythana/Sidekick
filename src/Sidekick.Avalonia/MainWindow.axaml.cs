@@ -35,16 +35,10 @@ public partial class MainWindow : Window
         this.viewLocator = (AvaloniaViewLocator)viewLocator;
         
 
-        browser = new AvaloniaCefBrowser();
-        BrowserWrapper.Child = browser;
-        
-        Deactivated += (_, _) =>
-        {
-            if (SidekickView?.CloseOnBlur == true)
-            {
-                viewLocator.Close(SidekickView);
-            }
-        };
+        // browser = new AvaloniaCefBrowser();
+        // BrowserWrapper.Child = browser;
+
+        Deactivated += OnDeactivated;
     }
 
     internal SidekickView? SidekickView { get; set; }
@@ -132,5 +126,13 @@ public partial class MainWindow : Window
     private void TopBorder_OnPointerPressed(object? sender, PointerPressedEventArgs e)
     {
         BeginMoveDrag(e);
+    }
+    
+    private void OnDeactivated(object? o, EventArgs eventArgs)
+    {
+        if (SidekickView?.CloseOnBlur == true)
+        {
+            viewLocator.Close(SidekickView);
+        }
     }
 }

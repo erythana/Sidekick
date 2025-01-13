@@ -67,20 +67,23 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\src\Sidekick.Apis.PoeNinja\Sidekick.Apis.PoeNinja.csproj" />
-      <ProjectReference Include="..\src\Sidekick.Apis.PoePriceInfo\Sidekick.Apis.PoePriceInfo.csproj" />
-      <ProjectReference Include="..\src\Sidekick.Apis.PoeWiki\Sidekick.Apis.PoeWiki.csproj" />
-      <ProjectReference Include="..\src\Sidekick.Common.Blazor\Sidekick.Common.Blazor.csproj" />
-      <ProjectReference Include="..\src\Sidekick.Common.Ui\Sidekick.Common.Ui.csproj" />
-      <ProjectReference Include="..\src\Sidekick.Common.Updater\Sidekick.Common.Updater.csproj" />
-      <ProjectReference Include="..\src\Sidekick.Common\Sidekick.Common.csproj" />
-      <ProjectReference Include="..\src\Sidekick.Mock\Sidekick.Mock.csproj" />
-      <ProjectReference Include="..\src\Sidekick.Modules.Chat\Sidekick.Modules.Chat.csproj" />
-      <ProjectReference Include="..\src\Sidekick.Modules.Development\Sidekick.Modules.Development.csproj" />
-      <ProjectReference Include="..\src\Sidekick.Modules.General\Sidekick.Modules.General.csproj" />
-      <ProjectReference Include="..\src\Sidekick.Modules.Maps\Sidekick.Modules.Maps.csproj" />
-      <ProjectReference Include="..\src\Sidekick.Modules.Trade\Sidekick.Modules.Trade.csproj" />
-      <ProjectReference Include="..\src\Sidekick.Modules.Wealth\Sidekick.Modules.Wealth.csproj" />
+      <ProjectReference Include="..\Sidekick.Apis.GitHub\Sidekick.Apis.GitHub.csproj" />
+      <ProjectReference Include="..\Sidekick.Apis.PoeNinja\Sidekick.Apis.PoeNinja.csproj" />
+      <ProjectReference Include="..\Sidekick.Apis.PoePriceInfo\Sidekick.Apis.PoePriceInfo.csproj" />
+      <ProjectReference Include="..\Sidekick.Apis.PoeWiki\Sidekick.Apis.PoeWiki.csproj" />
+      <ProjectReference Include="..\Sidekick.Apis.Poe\Sidekick.Apis.Poe.csproj" />
+      <ProjectReference Include="..\Sidekick.Common.Database\Sidekick.Common.Database.csproj" />
+      <ProjectReference Include="..\Sidekick.Common.Platform\Sidekick.Common.Platform.csproj" />
+      <ProjectReference Include="..\Sidekick.Common.Ui\Sidekick.Common.Ui.csproj" />
+      <ProjectReference Include="..\Sidekick.Common.Updater\Sidekick.Common.Updater.csproj" />
+      <ProjectReference Include="..\Sidekick.Common\Sidekick.Common.csproj" />
+      <ProjectReference Include="..\Sidekick.Modules.Chat\Sidekick.Modules.Chat.csproj" />
+      <ProjectReference Include="..\Sidekick.Modules.Development\Sidekick.Modules.Development.csproj" />
+      <ProjectReference Include="..\Sidekick.Modules.General\Sidekick.Modules.General.csproj" />
+      <ProjectReference Include="..\Sidekick.Modules.Maps\Sidekick.Modules.Maps.csproj" />
+      <ProjectReference Include="..\Sidekick.Modules.Trade\Sidekick.Modules.Trade.csproj" />
+      <ProjectReference Include="..\Sidekick.Modules.Wealth\Sidekick.Modules.Wealth.csproj" />
+      <ProjectReference Include="..\Sidekick.Web\Sidekick.Web.csproj" />
     </ItemGroup>
 
     <ItemGroup>
