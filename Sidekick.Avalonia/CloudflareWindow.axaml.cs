@@ -7,11 +7,16 @@ using Microsoft.Extensions.Logging;
 using Sidekick.Apis.Poe.Clients;
 using Sidekick.Apis.Poe.CloudFlare;
 using Sidekick.Avalonia.Helpers;
+using Xilium.CefGlue;
+using Xilium.CefGlue.Avalonia;
+using Xilium.CefGlue.Common.Events;
 
 namespace Sidekick.Avalonia;
 
 public partial class CloudflareWindow : Window
 {
+    private AvaloniaCefBrowser? browser;
+
     private readonly ILogger logger;
     private readonly ICloudflareService cloudflareService;
     private readonly Uri uri;
@@ -23,35 +28,66 @@ public partial class CloudflareWindow : Window
         this.logger = logger;
         this.cloudflareService = cloudflareService;
         this.uri = uri;
-        // Ready();
+        Ready();
     }
 
-    // public void Ready()
-    // {
-    //     _ = Dispatcher.UIThread.Invoke(async () =>
-    //     {
-    //         Topmost = true;
-    //         ShowInTaskbar = true;
-    //
-    //         await WebView.EnsureCoreWebView2Async();
-    //         WebView.CoreWebView2.Settings.UserAgent = PoeTradeHandler.UserAgent;
-    //
-    //         // Handle cookie changes by checking cookies after navigation
-    //         WebView.CoreWebView2.NavigationCompleted += CoreWebView2_NavigationCompleted;
-    //
-    //         WebView.Source = uri;
-    //
-    //         // This avoids the white flicker which is caused by the page content not being loaded initially. We show the webview control only when the content is ready.
-    //         WebView.Visibility = Visibility.Visible;
-    //
-    //         // The window background is transparent to avoid any flickering when opening a window. When the webview content is ready we need to set a background color. Otherwise, mouse clicks will go through the window.
-    //         Background = (Brush?)new BrushConverter().ConvertFrom("#000000");
-    //         Opacity = 0.01;
-    //
-    //         CenterHelper.Center(this);
-    //         Activate();
-    //     });
-    // }
+    public void Ready()
+    {
+        browser = new AvaloniaCefBrowser();
+        browser.LoadEnd += BrowserOnLoadEnd;
+        
+        
+        BrowserWrapper.Child = browser;
+        
+
+        Dispatcher.UIThread.Invoke(() =>
+        {
+            Topmost = true;
+            ShowInTaskbar = true;
+
+            browser.Address = uri.ToString();
+            
+            // The window background is transparent to avoid any flickering when opening a window. When the webview content is ready we need to set a background color. Otherwise, mouse clicks will go through the window.
+            Background = (Brush?)new BrushConverter().ConvertFrom("#000000");
+            Opacity = 0.01;
+    
+            CenterHelper.Center(this);
+            Activate();
+        });
+    }
+    
+    public class CloudflareCookieVisitor : CefCookieVisitor
+    {
+        protected override bool Visit(CefCookie cookie, int count, int total, out bool delete)
+        {
+            delete = false;
+            return true;
+        }
+    }
+
+    private void BrowserOnLoadEnd(object sender, LoadEndEventArgs e)
+    {
+        try
+        {
+            var manager = CefCookieManager.GetGlobal(null);
+            var cookieVisitor = new CloudflareCookieVisitor();
+            if(!manager.VisitUrlCookies(uri.GetLeftPart(UriPartial.Authority), false, cookieVisitor))
+                return;
+            
+            
+    
+            // Store the Cloudflare cookie
+            challengeCompleted = true;
+            // _ = cloudflareService.CaptchaChallengeCompleted(cookies.ToDictionary(c => c.Name, c => c.Value));
+            logger.LogInformation("[CloudflareWindow] Cookie check completed, challenge likely completed");
+    
+            Dispatcher.UIThread.Invoke(Close);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "[CloudflareWindow] Error handling cookie check");
+        }
+    }
 
     protected override void OnClosing(WindowClosingEventArgs e)
     {
@@ -66,27 +102,5 @@ public partial class CloudflareWindow : Window
         base.OnClosing(e);
     }
 
-    // private async void CoreWebView2_NavigationCompleted(object? sender, CoreWebView2NavigationCompletedEventArgs e)
-    // {
-    //     try
-    //     {
-    //         var cookies = await WebView.CoreWebView2.CookieManager.GetCookiesAsync(uri.GetLeftPart(UriPartial.Authority));
-    //         var cfCookie = cookies.FirstOrDefault(c => c.Name == "cf_clearance");
-    //         if (cfCookie == null)
-    //         {
-    //             return;
-    //         }
-    //
-    //         // Store the Cloudflare cookie
-    //         challengeCompleted = true;
-    //         _ = cloudflareService.CaptchaChallengeCompleted(cookies.ToDictionary(c => c.Name, c => c.Value));
-    //         logger.LogInformation("[CloudflareWindow] Cookie check completed, challenge likely completed");
-    //
-    //         Dispatcher.UIThread.Invoke(Close);
-    //     }
-    //     catch (Exception ex)
-    //     {
-    //         logger.LogError(ex, "[CloudflareWindow] Error handling cookie check");
-    //     }
-    // }
+   
 }

@@ -5,7 +5,7 @@ using Sidekick.Common.Platform;
 
 namespace Sidekick.Avalonia.Services
 {
-    public class WpfApplicationService : IApplicationService
+    public class AvaloniaApplicationService : IApplicationService
     {
         public void Shutdown()
         {

@@ -11,6 +11,6 @@
         Background="Black"
         WindowStartupLocation="CenterScreen">
     <Grid Name="Grid">
-        <!-- <wv2:WebView2 Name="WebView" Visibility="Hidden"></wv2:WebView2> -->
+        <Decorator x:Name="BrowserWrapper" />
     </Grid>
 </Window>

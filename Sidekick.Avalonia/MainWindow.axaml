@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:Sidekick.Avalonia"
+    xmlns:cefglue="clr-namespace:Xilium.CefGlue.Avalonia;assembly=Xilium.CefGlue.Avalonia"
     Title="Sidekick"
     Width="0"
     Height="0"
@@ -31,16 +32,7 @@
                     Opacity="0.01" />
             </Grid>
         </local:OverlayControl>
-
-        <!--TODO-->
-        <!-- <blazor:BlazorWebView -->
-        <!--     Name="WebView" -->
-        <!--     HostPage="wwwroot\index.html" -->
-        <!--     Services="{DynamicResource services}" -->
-        <!--     Visibility="Hidden"> -->
-        <!--     <blazor:BlazorWebView.RootComponents> -->
-        <!--         <blazor:RootComponent ComponentType="{x:Type local:SidekickBlazorWrapper}" Selector="#app" /> -->
-        <!--     </blazor:BlazorWebView.RootComponents> -->
-        <!-- </blazor:BlazorWebView> -->
+        
+        <Decorator x:Name="BrowserWrapper" />
     </Grid>
 </Window>
