@@ -4,13 +4,9 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Media;
-using Avalonia.Threading;
 using Microsoft.Extensions.DependencyInjection;
 using Sidekick.Avalonia.Services;
 using Sidekick.Common.Ui.Views;
-using Xilium.CefGlue;
-using Xilium.CefGlue.Avalonia;
-using Xilium.CefGlue.Common.Handlers;
 
 namespace Sidekick.Avalonia;
 
@@ -19,7 +15,6 @@ namespace Sidekick.Avalonia;
 /// </summary>
 public partial class MainWindow : Window
 {
-    private AvaloniaCefBrowser? browser;
     private readonly AvaloniaViewLocator viewLocator;
     private bool isClosing;
 
@@ -34,16 +29,12 @@ public partial class MainWindow : Window
         Resources.Add("services", Scope.ServiceProvider);
         this.viewLocator = (AvaloniaViewLocator)viewLocator;
         
-        // browser = new AvaloniaCefBrowser();
-        // browser.Address = "https://www.google.com";
-        // BrowserWrapper.Child = browser;
-
         Deactivated += OnDeactivated;
     }
 
     internal SidekickView? SidekickView { get; set; }
 
-    internal string? CurrentWebPath => WebUtility.UrlDecode(browser?.Address);
+    internal string? CurrentWebPath => WebUtility.UrlDecode(WebView.BlazorWebView.Uri);
 
     public void Ready()
     {
@@ -96,7 +87,7 @@ public partial class MainWindow : Window
         Scope.Dispose();
         try
         {
-            browser?.Dispose();
+            WebView?.BlazorWebView.Dispose();//TODO: nono, implement dispose in embedded control
         }
         catch (Exception)
         {
@@ -104,7 +95,7 @@ public partial class MainWindow : Window
         }
         finally
         {
-            browser = null;
+            WebView = null;
         }
        
         //TODO

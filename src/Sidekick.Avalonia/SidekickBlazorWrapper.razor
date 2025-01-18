@@ -1,0 +1,30 @@
+@using Microsoft.JSInterop;
+@using Sidekick.Avalonia.Services
+
+@if (Ready)
+{
+    <Sidekick.Common.Blazor.Main />
+}
+
+@inject AvaloniaViewLocator ViewLocator
+@inject IJSRuntime JsRuntime
+
+@code {
+
+    private bool Ready { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!string.IsNullOrEmpty(ViewLocator.NextUrl))
+        {
+            await JsRuntime.InvokeVoidAsync("eval", $"window.location = '{ViewLocator.NextUrl}'");
+            ViewLocator.NextUrl = null;
+        }
+        else
+        {
+            Ready = true;
+        }
+
+        await base.OnInitializedAsync();
+    }
+}

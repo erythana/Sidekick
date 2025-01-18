@@ -5,9 +5,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:Sidekick.Avalonia"
+    xmlns:nativeControls="clr-namespace:Sidekick.Avalonia.BlazorWebView.NativeControls"
     Title="Sidekick"
-    Width="10"
-    Height="10"
+    Width="100"
+    Height="100"
     Background="Red"
     CanResize="True"
     WindowStartupLocation="CenterScreen"
@@ -16,22 +17,22 @@
     mc:Ignorable="d">
     
     <Grid Name="Grid" Margin="5">
-        <local:OverlayControl
-            x:Name="OverlayContainer"
-            Height="40"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Top">
-            <!--  Border used for dragging the window.  -->
-            <Grid ColumnDefinitions="70*,30*">
-                <Border
-                    Name="TopBorder"
-                    Grid.Column="0"
-                    Background="Green"
-                    PointerPressed="TopBorder_OnPointerPressed"
-                    Opacity="0.99" />
-            </Grid>
-        </local:OverlayControl>
+        <!-- <local:OverlayControl -->
+        <!--     x:Name="OverlayContainer" -->
+        <!--     Height="40" -->
+        <!--     HorizontalAlignment="Stretch" -->
+        <!--     VerticalAlignment="Top"> -->
+        <!--     ~1~  Border used for dragging the window.  @1@ -->
+        <!--     <Grid ColumnDefinitions="70*,30*"> -->
+        <!--         <Border -->
+        <!--             Name="TopBorder" -->
+        <!--             Grid.Column="0" -->
+        <!--             Background="Green" -->
+        <!--             PointerPressed="TopBorder_OnPointerPressed" -->
+        <!--             Opacity="0.99" /> -->
+        <!--     </Grid> -->
+        <!-- </local:OverlayControl> -->
         
-        <Decorator x:Name="BrowserWrapper" />
+        <nativeControls:EmbedWebView x:Name="WebView" />
     </Grid>
 </Window>

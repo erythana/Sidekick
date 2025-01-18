@@ -15,6 +15,7 @@ using Sidekick.Apis.Poe;
 using Sidekick.Apis.PoeNinja;
 using Sidekick.Apis.PoePriceInfo;
 using Sidekick.Apis.PoeWiki;
+using Sidekick.Avalonia.BlazorWebView;
 using Sidekick.Avalonia.Services;
 using Sidekick.Common;
 using Sidekick.Common.Blazor;
@@ -78,6 +79,7 @@ namespace Sidekick.Avalonia;
             {
                 _ = HandleInterprocessCommunications(desktop.Args ?? []);
                 desktop.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+                desktop.MainWindow = new MainWindow(viewLocator);
                 desktop.Exit += OnExit;
             }
 
@@ -157,6 +159,13 @@ namespace Sidekick.Avalonia;
                 // Common
                 .AddSidekickCommon()
                 .AddSidekickCommonBlazor()
+                .AddBlazorWebViewOptions(
+                    new BlazorWebViewOptions
+                    {
+                        RootComponent = typeof(SidekickBlazorWrapper),
+                        HostPath = "wwwroot/index.html",
+                    }
+                )
                 .AddSidekickCommonDatabase(SidekickPaths.DatabasePath)
                 .AddSidekickCommonUi()
                 .AddSidekickCommonPlatform(o =>

@@ -1,95 +1,100 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <OutputType>WinExe</OutputType>
-        <TargetFramework>net8.0</TargetFramework>
-        <Nullable>enable</Nullable>
-        <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
-        <ApplicationManifest>app.manifest</ApplicationManifest>
-        <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
-    </PropertyGroup>
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
-    <ItemGroup>
-        <PackageReference Include="Avalonia" Version="11.0.10"/>
-        <PackageReference Include="Avalonia.Desktop" Version="11.0.10"/>
-        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.10"/>
-        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.10"/>
-        <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.10"/>
-        <PackageReference Include="CefGlue.Avalonia" Version="120.6099.210" />
-        <PackageReference Include="ReactiveUI" Version="20.1.63" />
-    </ItemGroup>
+  <PropertyGroup>
+    <Version>1.0.0.0</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <InformationalVersion>1.0.0.0</InformationalVersion>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>true</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <PublishSingleFile>false</PublishSingleFile>
+    <SelfContained>true</SelfContained>
+    <PublishReadyToRun>true</PublishReadyToRun>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <AssemblyName>Sidekick</AssemblyName>
+    <Title>Sidekick</Title>
+    <Authors>$(AssemblyName) Collaborators</Authors>
+    <Company>$(AssemblyName)</Company>
+    <Description>A Path of Exile companion tool.</Description>
+    <PackageProjectUrl>https://sidekick-poe.github.io/</PackageProjectUrl>
+    <PackageIcon>android-chrome-192x192.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/Sidekick-Poe/Sidekick</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <EnableWindowsFormsInterop>false</EnableWindowsFormsInterop>
+  </PropertyGroup>
 
-    <ItemGroup>
-      <Content Update="wwwroot\.gitignore">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Update="wwwroot\favicon.ico">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Update="wwwroot\index.html">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Update="SidekickBlazorWrapper.razor">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      </Content>
-      <Content Update=".gitignore">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      </Content>
-      <Content Update=".gitignore">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      </Content>
-      <Content Update="SidekickBlazorWrapper.razor">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      </Content>
-    </ItemGroup>
+  <ItemGroup>
+    <Content Include="favicon.ico"/>
+    <Content Include=".gitignore">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
 
-    <ItemGroup>
-      <None Include="..\README.md">
-        <Pack>True</Pack>
-        <PackagePath>/</PackagePath>
-        <Link>README.md</Link>
-      </None>
-      <None Include="..\src\Sidekick.Common.Ui\wwwroot\android-chrome-192x192.png">
-        <Pack>True</Pack>
-        <PackagePath>/</PackagePath>
-        <Link>android-chrome-192x192.png</Link>
-      </None>
-    </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\Sidekick.Common.Ui\wwwroot\android-chrome-192x192.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\Sidekick.Apis.GitHub\Sidekick.Apis.GitHub.csproj" />
-      <ProjectReference Include="..\Sidekick.Apis.PoeNinja\Sidekick.Apis.PoeNinja.csproj" />
-      <ProjectReference Include="..\Sidekick.Apis.PoePriceInfo\Sidekick.Apis.PoePriceInfo.csproj" />
-      <ProjectReference Include="..\Sidekick.Apis.PoeWiki\Sidekick.Apis.PoeWiki.csproj" />
-      <ProjectReference Include="..\Sidekick.Apis.Poe\Sidekick.Apis.Poe.csproj" />
-      <ProjectReference Include="..\Sidekick.Common.Database\Sidekick.Common.Database.csproj" />
-      <ProjectReference Include="..\Sidekick.Common.Platform\Sidekick.Common.Platform.csproj" />
-      <ProjectReference Include="..\Sidekick.Common.Ui\Sidekick.Common.Ui.csproj" />
-      <ProjectReference Include="..\Sidekick.Common.Updater\Sidekick.Common.Updater.csproj" />
-      <ProjectReference Include="..\Sidekick.Common\Sidekick.Common.csproj" />
-      <ProjectReference Include="..\Sidekick.Modules.Chat\Sidekick.Modules.Chat.csproj" />
-      <ProjectReference Include="..\Sidekick.Modules.Development\Sidekick.Modules.Development.csproj" />
-      <ProjectReference Include="..\Sidekick.Modules.General\Sidekick.Modules.General.csproj" />
-      <ProjectReference Include="..\Sidekick.Modules.Maps\Sidekick.Modules.Maps.csproj" />
-      <ProjectReference Include="..\Sidekick.Modules.Trade\Sidekick.Modules.Trade.csproj" />
-      <ProjectReference Include="..\Sidekick.Modules.Wealth\Sidekick.Modules.Wealth.csproj" />
-      <ProjectReference Include="..\Sidekick.Web\Sidekick.Web.csproj" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.0.10"/>
+    <PackageReference Include="Avalonia.Desktop" Version="11.0.10"/>
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.10"/>
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.10"/>
+    <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.10"/>
+    <PackageReference Include="GirCore.Gtk-4.0" Version="0.5.0"/>
+    <PackageReference Include="GirCore.WebKit-6.0" Version="0.5.0"/>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebView" Version="8.0.12"/>
+    <PackageReference Include="ReactiveUI" Version="20.1.63"/>
+  </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Sidekick.Common.Updater\Sidekick.Common.Updater.csproj"/>
+    <ProjectReference Include="..\Sidekick.Common.Platform\Sidekick.Common.Platform.csproj"/>
+    <ProjectReference Include="..\Sidekick.Mock\Sidekick.Mock.csproj"/>
+    <ProjectReference Include="..\Sidekick.Modules.Chat\Sidekick.Modules.Chat.csproj"/>
+    <ProjectReference Include="..\Sidekick.Modules.Development\Sidekick.Modules.Development.csproj"/>
+    <ProjectReference Include="..\Sidekick.Modules.General\Sidekick.Modules.General.csproj"/>
+    <ProjectReference Include="..\Sidekick.Modules.Maps\Sidekick.Modules.Maps.csproj"/>
+    <ProjectReference Include="..\Sidekick.Modules.Trade\Sidekick.Modules.Trade.csproj"/>
+    <ProjectReference Include="..\Sidekick.Modules.Wealth\Sidekick.Modules.Wealth.csproj"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="wwwroot\favicon.ico"/>
+    <AvaloniaResource Include="Assets\favicon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AvaloniaResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\**">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Sidekick.Protocol.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <Target Name="Copywwwroot" BeforeTargets="Build">
     <ItemGroup>
-      <None Remove="wwwroot\favicon.ico" />
-      <AvaloniaResource Include="Assets\favicon.ico">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </AvaloniaResource>
+      <WwwRootFiles Include="$(ProjectDir)..\Sidekick.Common.Ui\wwwroot\**\*.*"/>
     </ItemGroup>
+    <Copy SourceFiles="@(WwwRootFiles)" DestinationFolder="$(ProjectDir)wwwroot\%(RecursiveDir)"/>
+  </Target>
 </Project>
