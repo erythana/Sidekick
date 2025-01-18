@@ -7,8 +7,8 @@ internal class LinuxHelper
     public static void EnsureInitialized()
     {
         if (isInitialized) return;
+        
         isInitialized = true;
-
         WebKit.Module.Initialize(); //TODO: only needs to be called once probably per app lifetime
     }
 }

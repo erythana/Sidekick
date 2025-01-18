@@ -33,6 +33,6 @@
         <!--     </Grid> -->
         <!-- </local:OverlayControl> -->
         
-        <nativeControls:EmbedWebView x:Name="WebView" />
+        <nativeControls:EmbedBlazorWebView x:Name="WebView" />
     </Grid>
 </Window>

@@ -5,14 +5,14 @@ using Sidekick.Avalonia.BlazorWebView.Helper;
 
 namespace Sidekick.Avalonia.BlazorWebView.NativeControls;
 
-public class EmbedWebView : NativeControlHost
+public class EmbedBlazorWebView : NativeControlHost
 {
     public BlazorWebView BlazorWebView { get; private set; }
 
     private IPlatformHandle CreateLinux(IPlatformHandle parent)
     {
         LinuxHelper.EnsureInitialized();
-        
+
         BlazorWebView = new BlazorWebView(App.ServiceProvider);
         BlazorWebView.Show();
         return new PlatformHandle(BlazorWebView.Handle, "BlazorWebView.Linux");
