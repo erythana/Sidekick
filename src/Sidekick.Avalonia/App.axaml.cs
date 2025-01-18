@@ -1,16 +1,15 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using ApexCharts;
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Avalonia.Threading;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using ReactiveUI;
 using Sidekick.Apis.GitHub;
 using Sidekick.Apis.Poe;
 using Sidekick.Apis.PoeNinja;
@@ -19,7 +18,6 @@ using Sidekick.Apis.PoeWiki;
 using Sidekick.Avalonia.Services;
 using Sidekick.Common;
 using Sidekick.Common.Blazor;
-using Sidekick.Common.Browser;
 using Sidekick.Common.Database;
 using Sidekick.Common.Platform;
 using Sidekick.Common.Platform.Interprocess;
@@ -79,53 +77,17 @@ namespace Sidekick.Avalonia;
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 _ = HandleInterprocessCommunications(desktop.Args ?? []);
+                desktop.ShutdownMode = ShutdownMode.OnExplicitShutdown;
                 desktop.Exit += OnExit;
-                desktop.MainWindow = new MainWindow(viewLocator);
             }
-            
-            InitializeTray();
-            
+
             base.OnFrameworkInitializationCompleted();
         }
         
-        private void InitializeTray()
-        {
-            var browserProvider = ServiceProvider.GetRequiredService<IBrowserProvider>();
-            
-            var menuItems = new List<TrayMenuItem>();
-
-            //todo localization
-            menuItems.AddRange(new List<TrayMenuItem>()
-            {
-                new(label: "Sidekick - Avalonia"),
-                new(label: "Open_Website",
-                    onClick: () =>
-                    {
-                        browserProvider.OpenSidekickWebsite();
-                        return Task.CompletedTask;
-                    }),
-
-                new(label: "Wealth", onClick: () => viewLocator.Open("/wealth")),
-
-                new(label: "Settings", onClick: () => viewLocator.Open("/settings")),
-                new(label: "Exit",
-                    onClick: () =>
-                    {
-                        appService.Shutdown();
-                        return Task.CompletedTask;
-                    }),
-            });
-
-            trayProvider.Initialize(menuItems);
-        }
-
-
         private void OnExit(object? sender, ControlledApplicationLifetimeExitEventArgs e)
         {
             if (ServiceProvider != null!)
-            {
                 ServiceProvider.Dispose();
-            }
         }
 
         public App()

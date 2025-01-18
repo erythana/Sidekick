@@ -34,8 +34,8 @@ public partial class MainWindow : Window
         Resources.Add("services", Scope.ServiceProvider);
         this.viewLocator = (AvaloniaViewLocator)viewLocator;
         
-
         // browser = new AvaloniaCefBrowser();
+        // browser.Address = "https://www.google.com";
         // BrowserWrapper.Child = browser;
 
         Deactivated += OnDeactivated;

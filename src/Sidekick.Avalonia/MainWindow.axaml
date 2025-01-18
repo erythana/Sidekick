@@ -5,10 +5,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:Sidekick.Avalonia"
-    xmlns:cefglue="clr-namespace:Xilium.CefGlue.Avalonia;assembly=Xilium.CefGlue.Avalonia"
     Title="Sidekick"
-    Width="1"
-    Height="1"
+    Width="10"
+    Height="10"
     Background="Red"
     CanResize="True"
     WindowStartupLocation="CenterScreen"
@@ -27,7 +26,7 @@
                 <Border
                     Name="TopBorder"
                     Grid.Column="0"
-                    Background="Black"
+                    Background="Green"
                     PointerPressed="TopBorder_OnPointerPressed"
                     Opacity="0.99" />
             </Grid>
